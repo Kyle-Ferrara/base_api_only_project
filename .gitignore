@@ -34,3 +34,4 @@
 
 # IDEs
 .idea
+.DS_Store
