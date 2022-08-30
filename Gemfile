@@ -28,6 +28,9 @@ gem 'discard'
 gem 'mysql2'
 gem 'sequel-rails'
 
+# anycable
+gem 'anycable-rails'
+
 # Sidekiq
 gem 'connection_pool'
 gem 'hiredis'
@@ -92,3 +95,5 @@ group :test do
   gem 'factory_bot_rails'
   gem 'rspec_junit_formatter'
 end
+
+gem "anycable-rails-jwt", "~> 0.1.0"
