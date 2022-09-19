@@ -398,7 +398,7 @@ PLATFORMS
 DEPENDENCIES
   active_record_query_trace
   anycable-rails
-  anycable-rails-jwt (~> 0.1.0)
+  anycable-rails-jwt
   argon2
   brakeman
   bundler-audit
