@@ -53,7 +53,7 @@ module BaseApiOnlyProject
     config.sequel.schema_format = :ruby
     config.sequel.load_database_tasks = :sequel
     config.sequel.allow_missing_migration_files = true
-    config.sequel.test_connect = true
+    config.sequel.test_connect = ENV.fetch('DB_CREATE') { 'false' }.to_s != 'true'
     config.sequel.after_new_connection = proc do |db|
       db.query('SET GLOBAL MAX_EXECUTION_TIME=5000;')
     end
