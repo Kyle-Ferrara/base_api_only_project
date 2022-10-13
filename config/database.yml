@@ -1,25 +1,33 @@
-# SQLite. Versions 3.8.0 and up are supported.
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem "sqlite3"
-#
 default: &default
-  adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  adapter: mysql2
+  username: "<%= ENV['DB_USER'] %>"
+  password: "<%= ENV['DB_PWD'] %>"
+  host: "<%= ENV['DB_HOST'] %>"
+  port: "<%= ENV.fetch('DB_PORT') { 3306 } %>"
+  collation: "<%= ENV.fetch('DB_COLLATION') { 'utf8mb4_0900_ai_ci' } %>"
+  charset: "<%= ENV.fetch('DB_CHARSET') { 'utf8mb4' } %>"
+  pool: "<%= ENV['SIDEKIQ_DB_POOL'] || ENV.fetch('RAILS_DB_POOL') { 1 } %>"
+  fractional_seconds: true
+#  flags:
+#    - COMPRESS
+#    - MULTI_STATEMENTS
+#    - REMEMBER_OPTIONS
+#    - TRANSACTIONS
+#    - -FOUND_ROWS
+  database_timezone: utc
+  application_timezone: utc
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  database: "<%= ENV.fetch('DB_SCHEMA') { 'base_api_db' } %>"
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/test.sqlite3
+  database: "<%= ENV.fetch('DB_SCHEMA') { 'base_api_db_test' } %>"
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: "<%= ENV.fetch('DB_SCHEMA') { 'base_api_db_prod' } %>"
